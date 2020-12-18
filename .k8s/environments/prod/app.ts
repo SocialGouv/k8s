@@ -1,6 +1,6 @@
 import { GlobalEnvironment } from "@socialgouv/kosko-charts/types"
 
-import config from "../../../socialgouv.json"
+import config from "../../../.socialgouv/config.json"
 
 const { name, subdomain } = config
 

@@ -1,6 +1,6 @@
 import env from "@kosko/env"
 
-import config from "../../socialgouv.json"
+import config from "../../.socialgouv/config.json"
 
 import * as app from "@socialgouv/kosko-charts/components/app"
 import * as nginx from "@socialgouv/kosko-charts/components/nginx"
