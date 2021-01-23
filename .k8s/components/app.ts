@@ -4,18 +4,20 @@ import config from "../../.socialgouv/config.json"
 
 import * as app from "@socialgouv/kosko-charts/components/app"
 import * as nginx from "@socialgouv/kosko-charts/components/nginx"
+import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImagePath"
 
-const { type } = config
+const { type, name } = config
 
 const { create } = type === "app" ? app : nginx
 
 const manifests = create(
-  "app",
+  name,
   type === "app"
     ? {
         env,
         config: { containerPort: 3000 },
         deployment: {
+          image: getHarborImagePath({ name }),
           container: {
             resources: {
               requests: {
@@ -30,7 +32,12 @@ const manifests = create(
           },
         },
       }
-    : { env }
+    : {
+        env,
+        deployment: {
+          image: getHarborImagePath({ name }),
+        },
+      }
 )
 
 export default manifests
