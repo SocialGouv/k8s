@@ -1,6 +1,6 @@
 name: Tests
 
-on: [push, pull_request]
+on: [push]
 
 #
 
@@ -15,7 +15,13 @@ jobs:
           fetch-depth: 0
 
       - name: Install
-        run: yarn --frozen-lockfile --perfer-offline
+        run: |
+          pwd
+          cd .k8s
+          yarn --frozen-lockfile --perfer-offline
 
       - name: Run tests
-        run: yarn test
+        run: |
+          pwd
+          cd .k8s
+          yarn test
