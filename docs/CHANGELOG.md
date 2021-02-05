@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/SocialGouv/k8s/compare/v1.0.0...v1.1.0) (2021-02-05)
+
+
+### Features
+
+* Add manifests creation for app and services. ([18ffbb3](https://github.com/SocialGouv/k8s/commit/18ffbb3df9f83692bdb92c3ac4e3a7083e1287cd))
+
 # 1.0.0 (2021-02-04)
 
 
