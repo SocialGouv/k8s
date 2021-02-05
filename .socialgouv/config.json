@@ -1,5 +1,7 @@
 {
   "name": "myapp",
   "type": "app",
-  "subdomain": "myapp"
+  "subdomain": "myapp",
+  "hasura": false,
+  "azure-pg": false
 }
