@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/SocialGouv/k8s/compare/v1.1.1...v1.1.2) (2021-02-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ts-node to ^9.1.1 ([35ed296](https://github.com/SocialGouv/k8s/commit/35ed2961e8daa3bcd13c3c3b0bafda9646bcdac2))
+
 ## [1.1.1](https://github.com/SocialGouv/k8s/compare/v1.1.0...v1.1.1) (2021-02-05)
 
 
