@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/SocialGouv/k8s/compare/v1.1.0...v1.1.1) (2021-02-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @types/node to ^13.13.41 ([1de8419](https://github.com/SocialGouv/k8s/commit/1de8419d53119404f85905c43463f263886d7ef9))
+
 # [1.1.0](https://github.com/SocialGouv/k8s/compare/v1.0.0...v1.1.0) (2021-02-05)
 
 
