@@ -2,8 +2,12 @@
 
 exports[`kosko generate --prod 1`] = `
 "---
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
     app.gitlab.com/env: prod2
     app.gitlab.com/env.name: prod2
@@ -22,6 +26,8 @@ spec:
   template:
     metadata:
       annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ''
+        kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-myapp
         app.gitlab.com/env: prod2
         app.gitlab.com/env.name: prod2
@@ -32,7 +38,7 @@ spec:
         team: myapp
     spec:
       containers:
-        - image: 'harbor.fabrique.social.gouv.fr/undefined/myapp:1.2.3'
+        - image: harbor.fabrique.social.gouv.fr/undefined/myapp:1.2.3
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -67,9 +73,9 @@ spec:
               path: /healthz
               port: http
             periodSeconds: 5
-apiVersion: apps/v1
-kind: Deployment
 ---
+apiVersion: v1
+kind: Service
 metadata:
   labels:
     app: myapp
@@ -78,6 +84,8 @@ metadata:
     team: myapp
   name: myapp
   annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
     app.gitlab.com/env: prod2
     app.gitlab.com/env.name: prod2
@@ -90,14 +98,16 @@ spec:
   selector:
     app: myapp
   type: ClusterIP
-apiVersion: v1
-kind: Service
 ---
+apiVersion: extensions/v1beta1
+kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     certmanager.k8s.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: 'true'
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
     app.gitlab.com/env: prod2
     app.gitlab.com/env.name: prod2
@@ -121,7 +131,5 @@ spec:
     - hosts:
         - myapp.fabrique.social.gouv.fr
       secretName: myapp-crt
-apiVersion: extensions/v1beta1
-kind: Ingress
 "
 `;
