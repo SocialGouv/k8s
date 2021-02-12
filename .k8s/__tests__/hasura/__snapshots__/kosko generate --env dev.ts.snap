@@ -2,6 +2,8 @@
 
 exports[`kosko generate --dev 1`] = `
 "---
+apiVersion: v1
+kind: Namespace
 metadata:
   annotations:
     field.cattle.io/creatorId: gitlab
@@ -19,11 +21,13 @@ metadata:
     team: myapp
     cert: wildcard
   name: myapp-85-master-dev2
-apiVersion: v1
-kind: Namespace
 ---
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
     app.gitlab.com/env: master-dev2
     app.gitlab.com/env.name: master-dev2
@@ -43,6 +47,8 @@ spec:
   template:
     metadata:
       annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ''
+        kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-myapp
         app.gitlab.com/env: master-dev2
         app.gitlab.com/env.name: master-dev2
@@ -90,9 +96,9 @@ spec:
               path: /healthz
               port: http
             periodSeconds: 5
-apiVersion: apps/v1
-kind: Deployment
 ---
+apiVersion: v1
+kind: Service
 metadata:
   labels:
     app: myapp
@@ -102,6 +108,8 @@ metadata:
     cert: wildcard
   name: myapp
   annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
     app.gitlab.com/env: master-dev2
     app.gitlab.com/env.name: master-dev2
@@ -114,12 +122,14 @@ spec:
   selector:
     app: myapp
   type: ClusterIP
-apiVersion: v1
-kind: Service
 ---
+apiVersion: extensions/v1beta1
+kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
     app.gitlab.com/env: master-dev2
     app.gitlab.com/env.name: master-dev2
@@ -144,11 +154,13 @@ spec:
     - hosts:
         - master-dev2-myapp.dev2.fabrique.social.gouv.fr
       secretName: wildcard-crt
-apiVersion: extensions/v1beta1
-kind: Ingress
 ---
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
     app.gitlab.com/env: master-dev2
     app.gitlab.com/env.name: master-dev2
@@ -168,6 +180,8 @@ spec:
   template:
     metadata:
       annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ''
+        kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-myapp
         app.gitlab.com/env: master-dev2
         app.gitlab.com/env.name: master-dev2
@@ -226,7 +240,7 @@ spec:
             - secretRef:
                 name: azure-pg-user-0123456
           image: >-
-            registry.gitlab.factory.social.gouv.fr/socialgouv/docker/wait-for-postgres:2.0.0
+            registry.gitlab.factory.social.gouv.fr/socialgouv/docker/wait-for-postgres:4.3.1
           imagePullPolicy: Always
           name: wait-for-postgres
           resources:
@@ -236,9 +250,9 @@ spec:
             requests:
               cpu: 5m
               memory: 16Mi
-apiVersion: apps/v1
-kind: Deployment
 ---
+apiVersion: v1
+kind: Service
 metadata:
   labels:
     app: hasura
@@ -248,6 +262,8 @@ metadata:
     cert: wildcard
   name: hasura
   annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ''
+    kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
     app.gitlab.com/env: master-dev2
     app.gitlab.com/env.name: master-dev2
@@ -260,7 +276,5 @@ spec:
   selector:
     app: hasura
   type: ClusterIP
-apiVersion: v1
-kind: Service
 "
 `;
