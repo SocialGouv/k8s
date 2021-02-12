@@ -5,7 +5,27 @@ import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImag
 import config from "../../.socialgouv/config.json"
 
 export default () => {
-  const { name, type } = config
+  const { name, type, probesPath } = <Config>config
+
+  const probes = probesPath
+    ? ["livenessProbe", "readinessProbe", "startupProbe"].reduce(
+        (probes, probe) => (
+          (probes = {
+            ...probes,
+            [probe]: {
+              httpGet: {
+                path: probesPath,
+                port: "http",
+              },
+              initialDelaySeconds: 30,
+              periodSeconds: 15,
+            },
+          }),
+          probes
+        ),
+        {}
+      )
+    : {}
 
   return config && type === "app"
     ? create(name, {
@@ -24,6 +44,7 @@ export default () => {
                 memory: "256Mi",
               },
             },
+            ...probes,
           },
         },
       })

@@ -5,7 +5,7 @@ import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImag
 import config from "../../.socialgouv/config.json"
 
 export default () => {
-  const { name, hasura } = config
+  const { name, hasura } = <Config>config
 
   return hasura
     ? create({

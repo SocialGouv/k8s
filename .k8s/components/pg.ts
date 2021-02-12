@@ -10,7 +10,9 @@ import { create } from "@socialgouv/kosko-charts/components/azure-pg"
 import config from "../../.socialgouv/config.json"
 
 export default () => {
-  if (!config || !config["azure-pg"]) {
+  const { azurepg } = <Config>config ?? {}
+
+  if (!azurepg) {
     return []
   }
 
