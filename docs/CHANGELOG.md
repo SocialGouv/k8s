@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/SocialGouv/k8s/compare/v1.1.3...v1.2.0) (2021-02-12)
+
+
+### Features
+
+* Add simple probes management. ([#16](https://github.com/SocialGouv/k8s/issues/16)) ([93717a7](https://github.com/SocialGouv/k8s/commit/93717a7e3fc5bc8a2a62399289a77519ee8b51bb))
+
 ## [1.1.3](https://github.com/SocialGouv/k8s/compare/v1.1.2...v1.1.3) (2021-02-09)
 
 
