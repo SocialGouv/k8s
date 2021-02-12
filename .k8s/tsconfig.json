@@ -9,7 +9,7 @@
     "moduleResolution": "node",
     "strict": true,
     "target": "es2015",
-    "types": ["node"],
+    "types": ["node", "jest"],
     "resolveJsonModule": true
   }
 }

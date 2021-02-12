@@ -7,10 +7,10 @@ import gitlab from "@socialgouv/kosko-charts/environments/gitlab"
 
 import { create } from "@socialgouv/kosko-charts/components/azure-pg"
 
-import config from "../../.socialgouv/config.json"
+import Config from "../utils/config"
 
 export default () => {
-  const { azurepg } = <Config>config ?? {}
+  const { azurepg } = Config() ?? {}
 
   if (!azurepg) {
     return []
