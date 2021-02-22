@@ -9,7 +9,7 @@ type ConfigTypes = {
 
 const Config = () => {
   const config = require(process.env.SOCIALGOUV_CONFIG_PATH ??
-    "../.socialgouv/config.json")
+    "../../.socialgouv/config.json")
 
   return config as ConfigTypes
 }
