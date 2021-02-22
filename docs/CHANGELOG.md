@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/SocialGouv/k8s/compare/v1.2.0...v1.2.1) (2021-02-22)
+
+
+### Bug Fixes
+
+* Update config.json default path. ([48138ee](https://github.com/SocialGouv/k8s/commit/48138ee2bcd0cf69102c7f875c72a76899c95812))
+
 # [1.2.0](https://github.com/SocialGouv/k8s/compare/v1.1.3...v1.2.0) (2021-02-12)
 
 
