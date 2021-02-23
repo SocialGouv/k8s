@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/SocialGouv/k8s/compare/v1.2.1...v1.2.2) (2021-02-23)
+
+
+### Bug Fixes
+
+* Add APP_BASE_URL env var. ([#18](https://github.com/SocialGouv/k8s/issues/18)) ([1aeb297](https://github.com/SocialGouv/k8s/commit/1aeb297f4e88a3500045704f1274d547440d8681))
+
 ## [1.2.1](https://github.com/SocialGouv/k8s/compare/v1.2.0...v1.2.1) (2021-02-22)
 
 
