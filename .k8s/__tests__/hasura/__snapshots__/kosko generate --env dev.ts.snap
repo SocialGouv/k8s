@@ -96,6 +96,9 @@ spec:
               path: /healthz
               port: http
             periodSeconds: 5
+          env:
+            - name: APP_BASE_URL
+              value: https://master-dev2-myapp.dev2.fabrique.social.gouv.fr
 ---
 apiVersion: v1
 kind: Service

@@ -73,6 +73,9 @@ spec:
               path: /healthz
               port: http
             periodSeconds: 5
+          env:
+            - name: APP_BASE_URL
+              value: https://myapp.fabrique.social.gouv.fr
 ---
 apiVersion: v1
 kind: Service
