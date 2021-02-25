@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/SocialGouv/k8s/compare/v1.2.2...v1.2.3) (2021-02-25)
+
+
+### Bug Fixes
+
+* Add withPostgres to expose pg secret. ([fde727a](https://github.com/SocialGouv/k8s/commit/fde727adf9bfca1702a7b799537ddf1da852422f))
+
 ## [1.2.2](https://github.com/SocialGouv/k8s/compare/v1.2.1...v1.2.2) (2021-02-23)
 
 
