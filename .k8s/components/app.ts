@@ -11,7 +11,7 @@ import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImag
 import Config from "../utils/config"
 
 export default () => {
-  const { name, type, probesPath } = Config()
+  const { name, type, probesPath, azurepg, hasura } = Config()
 
   const probes = probesPath
     ? ["livenessProbe", "readinessProbe", "startupProbe"].reduce(
@@ -36,7 +36,10 @@ export default () => {
   if (type && type === "app") {
     const manifests = create(name, {
       env,
-      config: { containerPort: 3000 },
+      config: {
+        containerPort: 3000,
+        withPostgres: azurepg && !hasura,
+      },
       deployment: {
         image: getHarborImagePath({ name }),
         container: {

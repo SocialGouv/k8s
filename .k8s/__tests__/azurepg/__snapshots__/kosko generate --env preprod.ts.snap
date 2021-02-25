@@ -95,9 +95,30 @@ spec:
               path: /healthz
               port: http
             periodSeconds: 5
+          envFrom:
+            - secretRef:
+                name: azure-pg-user
           env:
             - name: APP_BASE_URL
               value: https://preprod-myapp.dev2.fabrique.social.gouv.fr
+      initContainers:
+        - env:
+            - name: WAIT_FOR_RETRIES
+              value: '24'
+          envFrom:
+            - secretRef:
+                name: azure-pg-user
+          image: >-
+            registry.gitlab.factory.social.gouv.fr/socialgouv/docker/wait-for-postgres:4.3.1
+          imagePullPolicy: Always
+          name: wait-for-postgres
+          resources:
+            limits:
+              cpu: 20m
+              memory: 32Mi
+            requests:
+              cpu: 5m
+              memory: 16Mi
 ---
 apiVersion: v1
 kind: Service
