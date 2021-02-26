@@ -42,10 +42,10 @@ spec:
           livenessProbe:
             failureThreshold: 6
             httpGet:
-              path: /healthz
+              path: /api/healthz
               port: http
             initialDelaySeconds: 30
-            periodSeconds: 5
+            periodSeconds: 15
             timeoutSeconds: 5
           name: myapp
           ports:
@@ -54,10 +54,10 @@ spec:
           readinessProbe:
             failureThreshold: 15
             httpGet:
-              path: /healthz
+              path: /api/healthz
               port: http
-            initialDelaySeconds: 0
-            periodSeconds: 5
+            initialDelaySeconds: 30
+            periodSeconds: 15
             successThreshold: 1
             timeoutSeconds: 1
           resources:
@@ -70,9 +70,10 @@ spec:
           startupProbe:
             failureThreshold: 12
             httpGet:
-              path: /healthz
+              path: /api/healthz
               port: http
-            periodSeconds: 5
+            periodSeconds: 15
+            initialDelaySeconds: 30
           env:
             - name: APP_BASE_URL
               value: https://myapp.fabrique.social.gouv.fr

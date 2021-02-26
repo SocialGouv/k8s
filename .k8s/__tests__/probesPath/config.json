@@ -2,5 +2,5 @@
   "name": "myapp",
   "type": "app",
   "subdomain": "myapp",
-  "probes": "/api/healthz"
+  "probesPath": "/api/healthz"
 }
