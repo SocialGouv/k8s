@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`kosko generate --preprod 1`] = `
+exports[`kosko generate --dev 1`] = `
 "---
 apiVersion: v1
 kind: Namespace
@@ -8,19 +8,19 @@ metadata:
   annotations:
     field.cattle.io/creatorId: gitlab
     field.cattle.io/projectId: ''
-    git/branch: v1.2.3
+    git/branch: master
     git/remote: >-
       https://gitlab-ci-token:[MASKED]@gitlab.factory.social.gouv.fr/SocialGouv/myapp.git
     app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: preprod-dev2
-    app.gitlab.com/env.name: preprod-dev2
+    app.gitlab.com/env: master-dev2
+    app.gitlab.com/env.name: master-dev2
   labels:
     azure-pg-admin-user: myapp
-    application: v1-2-3-myapp
+    application: master-dev2-myapp
     owner: myapp
     team: myapp
     cert: wildcard
-  name: myapp-85-preprod-dev2
+  name: myapp-85-master-dev2
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -29,16 +29,17 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: preprod-dev2
-    app.gitlab.com/env.name: preprod-dev2
+    app.gitlab.com/env: master-dev2
+    app.gitlab.com/env.name: master-dev2
   labels:
     app: myapp
-    application: v1-2-3-myapp
+    application: master-dev2-myapp
     owner: myapp
     team: myapp
     cert: wildcard
+    component: nginx
   name: myapp
-  namespace: myapp-85-preprod-dev2
+  namespace: myapp-85-master-dev2
 spec:
   replicas: 1
   selector:
@@ -50,33 +51,35 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-myapp
-        app.gitlab.com/env: preprod-dev2
-        app.gitlab.com/env.name: preprod-dev2
+        app.gitlab.com/env: master-dev2
+        app.gitlab.com/env.name: master-dev2
       labels:
         app: myapp
-        application: v1-2-3-myapp
+        application: master-dev2-myapp
         owner: myapp
         team: myapp
         cert: wildcard
+        component: nginx
     spec:
       containers:
-        - image: harbor.fabrique.social.gouv.fr/undefined/myapp:1.2.3
+        - image: >-
+            harbor.fabrique.social.gouv.fr/undefined/myapp:0123456789abcdefghijklmnopqrstuvwxyz0123
           livenessProbe:
             failureThreshold: 6
             httpGet:
-              path: /healthz
+              path: /index.html
               port: http
             initialDelaySeconds: 30
             periodSeconds: 5
             timeoutSeconds: 5
           name: myapp
           ports:
-            - containerPort: 3000
+            - containerPort: 80
               name: http
           readinessProbe:
             failureThreshold: 15
             httpGet:
-              path: /healthz
+              path: /index.html
               port: http
             initialDelaySeconds: 0
             periodSeconds: 5
@@ -84,48 +87,24 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
-              cpu: 200m
-              memory: 256Mi
-            requests:
-              cpu: 50m
+              cpu: 500m
               memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 32Mi
           startupProbe:
             failureThreshold: 12
             httpGet:
-              path: /healthz
+              path: /index.html
               port: http
             periodSeconds: 5
-          envFrom:
-            - secretRef:
-                name: azure-pg-user
-          env:
-            - name: APP_BASE_URL
-              value: https://preprod-myapp.dev2.fabrique.social.gouv.fr
-      initContainers:
-        - env:
-            - name: WAIT_FOR_RETRIES
-              value: '24'
-          envFrom:
-            - secretRef:
-                name: azure-pg-user
-          image: >-
-            registry.gitlab.factory.social.gouv.fr/socialgouv/docker/wait-for-postgres:4.6.0
-          imagePullPolicy: Always
-          name: wait-for-postgres
-          resources:
-            limits:
-              cpu: 20m
-              memory: 32Mi
-            requests:
-              cpu: 5m
-              memory: 16Mi
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
     app: myapp
-    application: v1-2-3-myapp
+    application: master-dev2-myapp
     owner: myapp
     team: myapp
     cert: wildcard
@@ -134,14 +113,14 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: preprod-dev2
-    app.gitlab.com/env.name: preprod-dev2
-  namespace: myapp-85-preprod-dev2
+    app.gitlab.com/env: master-dev2
+    app.gitlab.com/env.name: master-dev2
+  namespace: myapp-85-master-dev2
 spec:
   ports:
     - name: http
       port: 80
-      targetPort: 3000
+      targetPort: 80
   selector:
     app: myapp
   type: ClusterIP
@@ -154,19 +133,19 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: preprod-dev2
-    app.gitlab.com/env.name: preprod-dev2
+    app.gitlab.com/env: master-dev2
+    app.gitlab.com/env.name: master-dev2
   labels:
     app: myapp
-    application: v1-2-3-myapp
+    application: master-dev2-myapp
     owner: myapp
     team: myapp
     cert: wildcard
   name: myapp
-  namespace: myapp-85-preprod-dev2
+  namespace: myapp-85-master-dev2
 spec:
   rules:
-    - host: preprod-myapp.dev2.fabrique.social.gouv.fr
+    - host: master-dev2-myapp.dev2.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -175,7 +154,7 @@ spec:
             path: /
   tls:
     - hosts:
-        - preprod-myapp.dev2.fabrique.social.gouv.fr
+        - master-dev2-myapp.dev2.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

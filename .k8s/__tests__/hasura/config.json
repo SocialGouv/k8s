@@ -1,6 +1,5 @@
 {
   "name": "myapp",
   "type": "app",
-  "subdomain": "myapp",
   "hasura": true
 }

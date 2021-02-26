@@ -37,6 +37,7 @@ metadata:
     owner: myapp
     team: myapp
     cert: wildcard
+    component: nginx
   name: myapp
   namespace: myapp-85-preprod-dev2
 spec:
@@ -58,25 +59,26 @@ spec:
         owner: myapp
         team: myapp
         cert: wildcard
+        component: nginx
     spec:
       containers:
         - image: harbor.fabrique.social.gouv.fr/undefined/myapp:1.2.3
           livenessProbe:
             failureThreshold: 6
             httpGet:
-              path: /healthz
+              path: /index.html
               port: http
             initialDelaySeconds: 30
             periodSeconds: 5
             timeoutSeconds: 5
           name: myapp
           ports:
-            - containerPort: 3000
+            - containerPort: 80
               name: http
           readinessProbe:
             failureThreshold: 15
             httpGet:
-              path: /healthz
+              path: /index.html
               port: http
             initialDelaySeconds: 0
             periodSeconds: 5
@@ -84,20 +86,17 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
-              cpu: 200m
-              memory: 256Mi
-            requests:
-              cpu: 50m
+              cpu: 500m
               memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 32Mi
           startupProbe:
             failureThreshold: 12
             httpGet:
-              path: /healthz
+              path: /index.html
               port: http
             periodSeconds: 5
-          env:
-            - name: APP_BASE_URL
-              value: https://preprod-myapp.dev2.fabrique.social.gouv.fr
 ---
 apiVersion: v1
 kind: Service
@@ -120,7 +119,7 @@ spec:
   ports:
     - name: http
       port: 80
-      targetPort: 3000
+      targetPort: 80
   selector:
     app: myapp
   type: ClusterIP
@@ -156,126 +155,5 @@ spec:
     - hosts:
         - preprod-myapp.dev2.fabrique.social.gouv.fr
       secretName: wildcard-crt
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  annotations:
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: preprod-dev2
-    app.gitlab.com/env.name: preprod-dev2
-  labels:
-    app: hasura
-    application: v1-2-3-myapp
-    owner: myapp
-    team: myapp
-    cert: wildcard
-  name: hasura
-  namespace: myapp-85-preprod-dev2
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: hasura
-  template:
-    metadata:
-      annotations:
-        kapp.k14s.io/disable-default-ownership-label-rules: ''
-        kapp.k14s.io/disable-default-label-scoping-rules: ''
-        app.gitlab.com/app: socialgouv-myapp
-        app.gitlab.com/env: preprod-dev2
-        app.gitlab.com/env.name: preprod-dev2
-      labels:
-        app: hasura
-        application: v1-2-3-myapp
-        owner: myapp
-        team: myapp
-        cert: wildcard
-    spec:
-      containers:
-        - image: harbor.fabrique.social.gouv.fr/undefined/myapp-hasura:1.2.3
-          livenessProbe:
-            failureThreshold: 6
-            httpGet:
-              path: /healthz
-              port: http
-            initialDelaySeconds: 30
-            periodSeconds: 5
-            timeoutSeconds: 5
-          name: hasura
-          ports:
-            - containerPort: 80
-              name: http
-          readinessProbe:
-            failureThreshold: 15
-            httpGet:
-              path: /healthz
-              port: http
-            initialDelaySeconds: 0
-            periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 1
-          resources:
-            limits:
-              cpu: 500m
-              memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 64Mi
-          startupProbe:
-            failureThreshold: 12
-            httpGet:
-              path: /healthz
-              port: http
-            periodSeconds: 5
-          envFrom:
-            - secretRef:
-                name: azure-pg-user
-      initContainers:
-        - env:
-            - name: WAIT_FOR_RETRIES
-              value: '24'
-          envFrom:
-            - secretRef:
-                name: azure-pg-user
-          image: >-
-            registry.gitlab.factory.social.gouv.fr/socialgouv/docker/wait-for-postgres:4.6.0
-          imagePullPolicy: Always
-          name: wait-for-postgres
-          resources:
-            limits:
-              cpu: 20m
-              memory: 32Mi
-            requests:
-              cpu: 5m
-              memory: 16Mi
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: hasura
-    application: v1-2-3-myapp
-    owner: myapp
-    team: myapp
-    cert: wildcard
-  name: hasura
-  annotations:
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: preprod-dev2
-    app.gitlab.com/env.name: preprod-dev2
-  namespace: myapp-85-preprod-dev2
-spec:
-  ports:
-    - name: http
-      port: 80
-      targetPort: 80
-  selector:
-    app: hasura
-  type: ClusterIP
 "
 `;
