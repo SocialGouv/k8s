@@ -93,9 +93,10 @@ spec:
           startupProbe:
             failureThreshold: 12
             httpGet:
-              path: /healthz
+              path: /startupProbe
               port: http
             periodSeconds: 5
+            initialDelaySeconds: 120
           env:
             - name: APP_BASE_URL
               value: https://master-dev2-myapp.dev2.fabrique.social.gouv.fr
