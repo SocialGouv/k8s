@@ -1,0 +1,14 @@
+{
+  "name": "myapp",
+  "type": "app",
+  "subdomain": "myapp2",
+  "probes": {
+    "startupProbe": {
+      "httpGet": {
+        "path": "/startupProbe",
+        "port": "http"
+      },
+      "initialDelaySeconds": 120
+    }
+  }
+}

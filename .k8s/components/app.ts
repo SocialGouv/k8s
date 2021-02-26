@@ -1,22 +1,22 @@
-import { ok } from "assert"
-import env from "@kosko/env"
-import { EnvVar } from "kubernetes-models/v1/EnvVar"
-import { addEnv } from "@socialgouv/kosko-charts/utils/addEnv"
-import { create } from "@socialgouv/kosko-charts/components/app"
-import { Deployment } from "kubernetes-models/apps/v1/Deployment"
-import { getIngressHost } from "@socialgouv/kosko-charts/utils/getIngressHost"
-import { getManifestByKind } from "@socialgouv/kosko-charts/utils/getManifestByKind"
-import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImagePath"
+import { ok } from "assert";
+import env from "@kosko/env";
+import { EnvVar } from "kubernetes-models/v1/EnvVar";
+import { addEnv } from "@socialgouv/kosko-charts/utils/addEnv";
+import { create } from "@socialgouv/kosko-charts/components/app";
+import { Deployment } from "kubernetes-models/apps/v1/Deployment";
+import { getIngressHost } from "@socialgouv/kosko-charts/utils/getIngressHost";
+import { getManifestByKind } from "@socialgouv/kosko-charts/utils/getManifestByKind";
+import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImagePath";
 
-import Config from "../utils/config"
+import Config from "../utils/config";
 
 export default () => {
-  const { name, type, probesPath, azurepg, hasura } = Config()
+  const { name, type, probes = {}, probesPath, azurepg, hasura } = Config();
 
-  const probes = probesPath
-    ? ["livenessProbe", "readinessProbe", "startupProbe"].reduce(
-        (probes, probe) => (
-          (probes = {
+  const podProbes = {
+    ...(probesPath
+      ? ["livenessProbe", "readinessProbe", "startupProbe"].reduce(
+          (probes, probe) => ({
             ...probes,
             [probe]: {
               httpGet: {
@@ -27,11 +27,11 @@ export default () => {
               periodSeconds: 15,
             },
           }),
-          probes
-        ),
-        {}
-      )
-    : {}
+          {}
+        )
+      : {}),
+    ...probes,
+  };
 
   if (type && type === "app") {
     const manifests = create(name, {
@@ -53,26 +53,26 @@ export default () => {
               memory: "256Mi",
             },
           },
-          ...probes,
+          ...podProbes,
         },
       },
-    })
+    });
 
     /* pass dynamic deployment URL as env var to the container */
     //@ts-expect-error
-    const deployment = getManifestByKind(manifests, Deployment) as Deployment
+    const deployment = getManifestByKind(manifests, Deployment) as Deployment;
 
-    ok(deployment)
+    ok(deployment);
 
     const frontendUrl = new EnvVar({
       name: "APP_BASE_URL",
       value: `https://${getIngressHost(manifests)}`,
-    })
+    });
 
-    addEnv({ deployment, data: frontendUrl })
+    addEnv({ deployment, data: frontendUrl });
 
-    return manifests
+    return manifests;
   } else {
-    return []
+    return [];
   }
-}
+};
