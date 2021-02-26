@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/SocialGouv/k8s/compare/v1.2.3...v1.3.0) (2021-02-26)
+
+
+### Features
+
+* config.probes ([#19](https://github.com/SocialGouv/k8s/issues/19)) ([3db6b88](https://github.com/SocialGouv/k8s/commit/3db6b882813421b53f33a1658c650a7b5f4f852e))
+
 ## [1.2.3](https://github.com/SocialGouv/k8s/compare/v1.2.2...v1.2.3) (2021-02-25)
 
 
