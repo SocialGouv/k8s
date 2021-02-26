@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/SocialGouv/k8s/compare/v1.3.0...v1.3.1) (2021-02-26)
+
+
+### Bug Fixes
+
+* **deps:** update kosko monorepo ([#14](https://github.com/SocialGouv/k8s/issues/14)) ([d882ca4](https://github.com/SocialGouv/k8s/commit/d882ca44b2f61f7bd12451df1df916e2c517a8d0))
+
 # [1.3.0](https://github.com/SocialGouv/k8s/compare/v1.2.3...v1.3.0) (2021-02-26)
 
 
