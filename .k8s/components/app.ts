@@ -11,7 +11,15 @@ import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImag
 import Config from "../utils/config";
 
 export default () => {
-  const { name, type, probes = {}, probesPath, azurepg, hasura } = Config();
+  const {
+    name,
+    type,
+    probes = {},
+    probesPath,
+    resources,
+    azurepg,
+    hasura,
+  } = Config();
 
   const podProbes = {
     ...(probesPath
@@ -43,7 +51,7 @@ export default () => {
       deployment: {
         image: getHarborImagePath({ name }),
         container: {
-          resources: {
+          resources: resources || {
             requests: {
               cpu: "50m",
               memory: "128Mi",
