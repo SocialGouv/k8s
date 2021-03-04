@@ -5,11 +5,12 @@ import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImag
 import Config from "../utils/config"
 
 export default () => {
-  const { name, type } = Config()
+  const { name, type, subdomain } = Config()
 
   return type === "static"
     ? create(name, {
         env,
+        config: { subdomain },
         deployment: {
           image: getHarborImagePath({ name }),
         },

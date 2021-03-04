@@ -627,10 +627,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@socialgouv/kosko-charts@4.9.1":
-  version "4.9.1"
-  resolved "https://registry.yarnpkg.com/@socialgouv/kosko-charts/-/kosko-charts-4.9.1.tgz#1761c1cdd66d628d2108a56978e8a91c546c1201"
-  integrity sha512-zv/nbo+0rZY0j710oELEfJzf82uVkpuIxh8iUDwaQrM0r4+B2k0YbpjYoUQR/bMocuim09stAwl1MwTt+h49WA==
+"@socialgouv/kosko-charts@4.9.3":
+  version "4.9.3"
+  resolved "https://registry.yarnpkg.com/@socialgouv/kosko-charts/-/kosko-charts-4.9.3.tgz#08471fef5c541c09f498c205e8c82c55b7aa79f2"
+  integrity sha512-CXL6ehimCAz/8rBWs4CeafQHfEQHDfSo2c3gNV+BNuKrCdnFNox8BWoXHHHNAwwNt6TzOH7nv97UwRFbpZOUVg==
   dependencies:
     "@kosko/env" "^1.0.3"
     "@kubernetes-models/sealed-secrets" "^1.2.0"

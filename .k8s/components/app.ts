@@ -11,7 +11,7 @@ import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImag
 import Config from "../utils/config";
 
 export default () => {
-  const { name, type, probes = {}, probesPath, azurepg, hasura } = Config();
+  const { name, subdomain, type, probes = {}, probesPath, azurepg, hasura } = Config();
 
   const podProbes = {
     ...(probesPath
@@ -37,6 +37,7 @@ export default () => {
     const manifests = create(name, {
       env,
       config: {
+        subdomain,
         containerPort: 3000,
         withPostgres: azurepg && !hasura,
       },

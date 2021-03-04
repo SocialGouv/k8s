@@ -5,7 +5,7 @@ import { project } from "@socialgouv/kosko-charts/testing/fake/gitlab-ci.env"
 
 jest.setTimeout(1000 * 60)
 
-test("kosko generate --dev", async () => {
+test("azurepg: kosko generate --dev", async () => {
   expect(
     await getEnvManifests("dev", "", {
       ...project("myapp").dev,

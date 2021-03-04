@@ -7,7 +7,7 @@ const name = "myapp"
 
 jest.setTimeout(1000 * 60)
 
-test("kosko generate --prod", async () => {
+test("subdomain: kosko generate --prod", async () => {
   expect(
     await getEnvManifests("prod", "'!(_*)'", {
       ...project(name).prod,
