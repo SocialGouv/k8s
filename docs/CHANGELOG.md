@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/SocialGouv/k8s/compare/v1.3.1...v1.3.2) (2021-03-04)
+
+
+### Bug Fixes
+
+* Upgrade kosko-charts and fix subdomain config. ([414730f](https://github.com/SocialGouv/k8s/commit/414730fcd38d43b6ed7471c7eed2512367a51b1e))
+
 ## [1.3.1](https://github.com/SocialGouv/k8s/compare/v1.3.0...v1.3.1) (2021-02-26)
 
 
