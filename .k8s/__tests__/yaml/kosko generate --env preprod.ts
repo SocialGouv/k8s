@@ -15,7 +15,7 @@ test("yaml: kosko generate --preprod", async () => {
   const sourceFile = path.join(__dirname, "redirect.yml")
   
   fs.mkdirSync(destFolder, { recursive: true })
-  fs.copyFile(sourceFile, `${destFolder}/redirect.yml`, () => {})
+  fs.copyFileSync(sourceFile, `${destFolder}/redirect.yml`)
 
   process.chdir(cwd)
 
