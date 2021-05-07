@@ -37,7 +37,7 @@ dev
 preprod
 prod
 
-You can also provided additionnal kube manifests in each environment `manifests`subfolder.
+You can also provide additionnal kube manifests in each environment `manifests`subfolder.
 
 ```
 environments
