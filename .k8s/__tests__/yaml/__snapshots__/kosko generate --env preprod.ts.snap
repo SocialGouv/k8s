@@ -1,27 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`app: kosko generate --dev 1`] = `
+exports[`yaml: kosko generate --preprod 1`] = `
 "---
-apiVersion: v1
-kind: Namespace
-metadata:
-  annotations:
-    field.cattle.io/creatorId: gitlab
-    field.cattle.io/projectId: ''
-    git/branch: master
-    git/remote: >-
-      https://gitlab-ci-token:[MASKED]@gitlab.factory.social.gouv.fr/SocialGouv/myapp.git
-    app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: master-dev2
-    app.gitlab.com/env.name: master-dev2
-  labels:
-    azure-pg-admin-user: myapp
-    application: master-dev2-myapp
-    owner: myapp
-    team: myapp
-    cert: wildcard
-  name: myapp-85-master-dev2
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -29,16 +9,16 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: master-dev2
-    app.gitlab.com/env.name: master-dev2
+    app.gitlab.com/env: preprod-dev2
+    app.gitlab.com/env.name: preprod-dev2
   labels:
     app: myapp
-    application: master-dev2-myapp
+    application: v1-2-3-myapp
     owner: myapp
     team: myapp
     cert: wildcard
   name: myapp
-  namespace: myapp-85-master-dev2
+  namespace: myapp-85-preprod-dev2
 spec:
   replicas: 1
   selector:
@@ -50,18 +30,17 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-myapp
-        app.gitlab.com/env: master-dev2
-        app.gitlab.com/env.name: master-dev2
+        app.gitlab.com/env: preprod-dev2
+        app.gitlab.com/env.name: preprod-dev2
       labels:
         app: myapp
-        application: master-dev2-myapp
+        application: v1-2-3-myapp
         owner: myapp
         team: myapp
         cert: wildcard
     spec:
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/undefined/myapp:0123456789abcdefghijklmnopqrstuvwxyz0123
+        - image: harbor.fabrique.social.gouv.fr/undefined/myapp:1.2.3
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -98,14 +77,14 @@ spec:
             periodSeconds: 5
           env:
             - name: APP_BASE_URL
-              value: https://master-dev2-myapp.dev2.fabrique.social.gouv.fr
+              value: https://preprod-myapp.dev2.fabrique.social.gouv.fr
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
     app: myapp
-    application: master-dev2-myapp
+    application: v1-2-3-myapp
     owner: myapp
     team: myapp
     cert: wildcard
@@ -114,9 +93,9 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: master-dev2
-    app.gitlab.com/env.name: master-dev2
-  namespace: myapp-85-master-dev2
+    app.gitlab.com/env: preprod-dev2
+    app.gitlab.com/env.name: preprod-dev2
+  namespace: myapp-85-preprod-dev2
 spec:
   ports:
     - name: http
@@ -134,19 +113,19 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: master-dev2
-    app.gitlab.com/env.name: master-dev2
+    app.gitlab.com/env: preprod-dev2
+    app.gitlab.com/env.name: preprod-dev2
   labels:
     app: myapp
-    application: master-dev2-myapp
+    application: v1-2-3-myapp
     owner: myapp
     team: myapp
     cert: wildcard
   name: myapp
-  namespace: myapp-85-master-dev2
+  namespace: myapp-85-preprod-dev2
 spec:
   rules:
-    - host: master-dev2-myapp.dev2.fabrique.social.gouv.fr
+    - host: preprod-myapp.dev2.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -155,7 +134,7 @@ spec:
             path: /
   tls:
     - hosts:
-        - master-dev2-myapp.dev2.fabrique.social.gouv.fr
+        - preprod-myapp.dev2.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: extensions/v1beta1
@@ -170,7 +149,7 @@ metadata:
     app.kubernetes.io/component: redirect
     app.kubernetes.io/name: www
   name: www-redirect
-  namespace: myapp-85-master-dev2
+  namespace: myapp-85-preprod-dev2
 spec:
   rules:
     - host: www.testapp.fr
