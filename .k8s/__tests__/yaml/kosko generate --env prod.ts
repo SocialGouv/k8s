@@ -5,7 +5,7 @@ import path from "path";
 import { getEnvManifests } from "@socialgouv/kosko-charts/testing";
 import { project } from "@socialgouv/kosko-charts/testing/fake/gitlab-ci.env";
 
-// change the cwd to a tmp folder
+// changes the cwd to a tmp folder
 import "../../utils/mock-directory";
 
 jest.setTimeout(1000 * 60);

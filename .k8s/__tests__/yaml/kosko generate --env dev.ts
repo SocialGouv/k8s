@@ -1,9 +1,12 @@
 //
-import fs from "fs";
+
+import fsx from "fs-extra";
 import path from "path";
-import "../../utils/mock-directory";
 import { getEnvManifests } from "@socialgouv/kosko-charts/testing";
 import { project } from "@socialgouv/kosko-charts/testing/fake/gitlab-ci.env";
+
+// changes the cwd to a tmp folder
+import "../../utils/mock-directory";
 
 jest.setTimeout(1000 * 60);
 
@@ -12,8 +15,9 @@ test("yaml: kosko generate --dev", async () => {
   const destFolder = `${process.cwd()}/environments/dev/yaml`;
   const sourceFile = path.join(__dirname, "redirect.yml");
 
-  fs.mkdirSync(destFolder, { recursive: true });
-  fs.copyFile(sourceFile, `${destFolder}/redirect.yml`, () => {});
+  await fsx.mkdir(destFolder, { recursive: true });
+  await fsx.copyFile(sourceFile, `${destFolder}/redirect.yml`);
+
   expect(
     await getEnvManifests("dev", "'!(_*)'", {
       ...project(name).dev,
