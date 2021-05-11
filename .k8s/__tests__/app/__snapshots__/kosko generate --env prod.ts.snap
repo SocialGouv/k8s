@@ -114,7 +114,6 @@ metadata:
     app.gitlab.com/app: socialgouv-myapp
     app.gitlab.com/env: prod2
     app.gitlab.com/env.name: prod2
-    nginx.ingress.kubernetes.io/configuration-snippet: 'more_set_headers \\"X-Answer: 42\\";'
   labels:
     app: myapp
     application: myapp
