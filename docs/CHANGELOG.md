@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/SocialGouv/k8s/compare/v1.3.2...v1.4.0) (2021-05-11)
+
+
+### Features
+
+* enable additionnal ingress.annotations ([#26](https://github.com/SocialGouv/k8s/issues/26)) ([598c70b](https://github.com/SocialGouv/k8s/commit/598c70b2bd37ed6969aa747aef11f7bbdea28291))
+
 ## [1.3.2](https://github.com/SocialGouv/k8s/compare/v1.3.1...v1.3.2) (2021-03-04)
 
 
