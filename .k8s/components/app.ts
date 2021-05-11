@@ -4,6 +4,7 @@ import { EnvVar } from "kubernetes-models/v1/EnvVar";
 import { addEnv } from "@socialgouv/kosko-charts/utils/addEnv";
 import { create } from "@socialgouv/kosko-charts/components/app";
 import { Deployment } from "kubernetes-models/apps/v1/Deployment";
+import { Ingress } from "kubernetes-models/networking.k8s.io/v1beta1/Ingress";
 import { getIngressHost } from "@socialgouv/kosko-charts/utils/getIngressHost";
 import { getManifestByKind } from "@socialgouv/kosko-charts/utils/getManifestByKind";
 import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImagePath";
@@ -11,7 +12,16 @@ import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImag
 import Config from "../utils/config";
 
 export default () => {
-  const { name, subdomain, type, probes = {}, probesPath, azurepg, hasura } = Config();
+  const {
+    name,
+    subdomain,
+    type,
+    probes = {},
+    probesPath,
+    azurepg,
+    hasura,
+    ingress,
+  } = Config();
 
   const podProbes = {
     ...(probesPath
@@ -62,6 +72,20 @@ export default () => {
     /* pass dynamic deployment URL as env var to the container */
     //@ts-expect-error
     const deployment = getManifestByKind(manifests, Deployment) as Deployment;
+
+    if (ingress && ingress.annotations) {
+      const deploymentIngress = getManifestByKind(
+        manifests,
+        //@ts-expect-error
+        Ingress
+      ) as Ingress;
+      if (deploymentIngress.metadata) {
+        deploymentIngress.metadata.annotations = {
+          ...(deploymentIngress.metadata.annotations || {}),
+          ...ingress.annotations,
+        };
+      }
+    }
 
     ok(deployment);
 

@@ -12,6 +12,9 @@ type ConfigTypes = {
   azurepg?: boolean;
   probes?: Probes;
   probesPath?: string;
+  ingress?: {
+    annotations?: Record<string, string>
+  }
 };
 
 const Config = () => {
