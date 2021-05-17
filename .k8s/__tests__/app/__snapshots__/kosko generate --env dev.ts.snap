@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`kosko generate --dev 1`] = `
+exports[`app: kosko generate --dev 1`] = `
 "---
 apiVersion: v1
 kind: Namespace

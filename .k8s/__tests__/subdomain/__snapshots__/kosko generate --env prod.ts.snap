@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`kosko generate --prod 1`] = `
+exports[`subdomain: kosko generate --prod 1`] = `
 "---
 apiVersion: apps/v1
 kind: Deployment
@@ -122,7 +122,7 @@ metadata:
   namespace: myapp
 spec:
   rules:
-    - host: myapp.fabrique.social.gouv.fr
+    - host: mysubdomain.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -131,7 +131,7 @@ spec:
             path: /
   tls:
     - hosts:
-        - myapp.fabrique.social.gouv.fr
+        - mysubdomain.fabrique.social.gouv.fr
       secretName: myapp-crt
 "
 `;

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`kosko generate --preprod 1`] = `
+exports[`hasura: kosko generate --preprod 1`] = `
 "---
 apiVersion: v1
 kind: Namespace
@@ -241,7 +241,7 @@ spec:
             - secretRef:
                 name: azure-pg-user
           image: >-
-            registry.gitlab.factory.social.gouv.fr/socialgouv/docker/wait-for-postgres:4.6.0
+            registry.gitlab.factory.social.gouv.fr/socialgouv/docker/wait-for-postgres:4.7.1
           imagePullPolicy: Always
           name: wait-for-postgres
           resources:

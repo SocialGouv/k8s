@@ -21,6 +21,9 @@ type ConfigTypes = {
   probes?: Probes;
   resources?: IIoK8sApiCoreV1ResourceRequirements;
   probesPath?: string;
+  ingress?: {
+    annotations?: Record<string, string>
+  }
 };
 
 const Config = () => {

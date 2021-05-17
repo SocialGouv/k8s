@@ -1,27 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`subdomain: kosko generate --dev 1`] = `
+exports[`app: kosko generate --prod 1`] = `
 "---
-apiVersion: v1
-kind: Namespace
-metadata:
-  annotations:
-    field.cattle.io/creatorId: gitlab
-    field.cattle.io/projectId: ''
-    git/branch: master
-    git/remote: >-
-      https://gitlab-ci-token:[MASKED]@gitlab.factory.social.gouv.fr/SocialGouv/myapp.git
-    app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: master-dev2
-    app.gitlab.com/env.name: master-dev2
-  labels:
-    azure-pg-admin-user: myapp
-    application: master-dev2-myapp
-    owner: myapp
-    team: myapp
-    cert: wildcard
-  name: myapp-85-master-dev2
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -29,57 +9,52 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: master-dev2
-    app.gitlab.com/env.name: master-dev2
+    app.gitlab.com/env: prod2
+    app.gitlab.com/env.name: prod2
   labels:
-    app: myapp
-    application: master-dev2-myapp
+    app: ingress-annotations
+    application: myapp
     owner: myapp
     team: myapp
-    cert: wildcard
-    component: nginx
-  name: myapp
-  namespace: myapp-85-master-dev2
+  name: ingress-annotations
+  namespace: myapp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: myapp
+      app: ingress-annotations
   template:
     metadata:
       annotations:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-myapp
-        app.gitlab.com/env: master-dev2
-        app.gitlab.com/env.name: master-dev2
+        app.gitlab.com/env: prod2
+        app.gitlab.com/env.name: prod2
       labels:
-        app: myapp
-        application: master-dev2-myapp
+        app: ingress-annotations
+        application: myapp
         owner: myapp
         team: myapp
-        cert: wildcard
-        component: nginx
     spec:
       containers:
-        - image: >-
-            harbor.fabrique.social.gouv.fr/undefined/myapp:0123456789abcdefghijklmnopqrstuvwxyz0123
+        - image: harbor.fabrique.social.gouv.fr/undefined/ingress-annotations:1.2.3
           livenessProbe:
             failureThreshold: 6
             httpGet:
-              path: /index.html
+              path: /healthz
               port: http
             initialDelaySeconds: 30
             periodSeconds: 5
             timeoutSeconds: 5
-          name: myapp
+          name: ingress-annotations
           ports:
-            - containerPort: 80
+            - containerPort: 3000
               name: http
           readinessProbe:
             failureThreshold: 15
             httpGet:
-              path: /index.html
+              path: /healthz
               port: http
             initialDelaySeconds: 0
             periodSeconds: 5
@@ -87,42 +62,44 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
-              cpu: 500m
-              memory: 128Mi
+              cpu: 200m
+              memory: 256Mi
             requests:
-              cpu: 5m
-              memory: 32Mi
+              cpu: 50m
+              memory: 128Mi
           startupProbe:
             failureThreshold: 12
             httpGet:
-              path: /index.html
+              path: /healthz
               port: http
             periodSeconds: 5
+          env:
+            - name: APP_BASE_URL
+              value: https://myapp.fabrique.social.gouv.fr
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: myapp
-    application: master-dev2-myapp
+    app: ingress-annotations
+    application: myapp
     owner: myapp
     team: myapp
-    cert: wildcard
-  name: myapp
+  name: ingress-annotations
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: master-dev2
-    app.gitlab.com/env.name: master-dev2
-  namespace: myapp-85-master-dev2
+    app.gitlab.com/env: prod2
+    app.gitlab.com/env.name: prod2
+  namespace: myapp
 spec:
   ports:
     - name: http
       port: 80
-      targetPort: 80
+      targetPort: 3000
   selector:
-    app: myapp
+    app: ingress-annotations
   type: ClusterIP
 ---
 apiVersion: extensions/v1beta1
@@ -130,31 +107,33 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: 'true'
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: master-dev2
-    app.gitlab.com/env.name: master-dev2
+    app.gitlab.com/env: prod2
+    app.gitlab.com/env.name: prod2
+    nginx.ingress.kubernetes.io/configuration-snippet: 'more_set_headers \\"X-Answer: 42\\";'
   labels:
-    app: myapp
-    application: master-dev2-myapp
+    app: ingress-annotations
+    application: myapp
     owner: myapp
     team: myapp
-    cert: wildcard
-  name: myapp
-  namespace: myapp-85-master-dev2
+  name: ingress-annotations
+  namespace: myapp
 spec:
   rules:
-    - host: master-dev2-myapp.dev2.fabrique.social.gouv.fr
+    - host: myapp.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
-              serviceName: myapp
+              serviceName: ingress-annotations
               servicePort: 80
             path: /
   tls:
     - hosts:
-        - master-dev2-myapp.dev2.fabrique.social.gouv.fr
-      secretName: wildcard-crt
+        - myapp.fabrique.social.gouv.fr
+      secretName: ingress-annotations-crt
 "
 `;
