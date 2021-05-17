@@ -1,7 +1,15 @@
+import { IIoK8sApiCoreV1ResourceRequirements } from "kubernetes-models/v1/ResourceRequirements";
+import { IIoK8sApiCoreV1Probe } from "kubernetes-models/v1/Probe";
+
 type Probes = {
-  startupProbe?: object;
-  livenessProbe?: object;
-  readinessProbe?: object;
+  startupProbe?: IIoK8sApiCoreV1Probe;
+  livenessProbe?: IIoK8sApiCoreV1Probe;
+  readinessProbe?: IIoK8sApiCoreV1Probe;
+};
+
+type Resources = {
+  requests?: Object;
+  limits?: Object;
 };
 
 type ConfigTypes = {
@@ -11,6 +19,7 @@ type ConfigTypes = {
   hasura?: boolean;
   azurepg?: boolean;
   probes?: Probes;
+  resources?: IIoK8sApiCoreV1ResourceRequirements;
   probesPath?: string;
   ingress?: {
     annotations?: Record<string, string>

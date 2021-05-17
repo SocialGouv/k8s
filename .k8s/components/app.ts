@@ -18,6 +18,7 @@ export default () => {
     type,
     probes = {},
     probesPath,
+    resources,
     azurepg,
     hasura,
     ingress,
@@ -54,7 +55,7 @@ export default () => {
       deployment: {
         image: getHarborImagePath({ name }),
         container: {
-          resources: {
+          resources: resources || {
             requests: {
               cpu: "50m",
               memory: "128Mi",
