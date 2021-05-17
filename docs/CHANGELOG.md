@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/SocialGouv/k8s/compare/v1.4.0...v1.5.0) (2021-05-17)
+
+
+### Features
+
+* enable resources override ([#21](https://github.com/SocialGouv/k8s/issues/21)) ([e8fe60b](https://github.com/SocialGouv/k8s/commit/e8fe60b252d0e0f258040f9f6eb6539a1bf15b07))
+
 # [1.4.0](https://github.com/SocialGouv/k8s/compare/v1.3.2...v1.4.0) (2021-05-11)
 
 
