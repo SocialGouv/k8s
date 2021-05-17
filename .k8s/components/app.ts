@@ -60,8 +60,8 @@ export default () => {
               memory: "128Mi",
             },
             limits: {
-              cpu: "200m",
-              memory: "256Mi",
+              cpu: "500m",
+              memory: "512Mi",
             },
           },
           ...podProbes,
