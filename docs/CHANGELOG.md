@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/SocialGouv/k8s/compare/v1.5.0...v1.5.1) (2021-05-19)
+
+
+### Bug Fixes
+
+* Add extra yaml files to main manifest. ([#25](https://github.com/SocialGouv/k8s/issues/25)) ([202935c](https://github.com/SocialGouv/k8s/commit/202935c6c9d23496091be5638d5ac11699801c0b))
+
 # [1.5.0](https://github.com/SocialGouv/k8s/compare/v1.4.0...v1.5.0) (2021-05-17)
 
 
