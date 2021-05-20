@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/SocialGouv/k8s/compare/v1.5.1...v1.6.0) (2021-05-20)
+
+
+### Features
+
+* **static:** add config.ingress.annotations ([#30](https://github.com/SocialGouv/k8s/issues/30)) ([48c5831](https://github.com/SocialGouv/k8s/commit/48c5831c606aecf70a41423eaf43ac7b1ff1784c))
+
 ## [1.5.1](https://github.com/SocialGouv/k8s/compare/v1.5.0...v1.5.1) (2021-05-19)
 
 
