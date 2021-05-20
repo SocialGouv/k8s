@@ -6,6 +6,9 @@ A dynamic `.k8s` folder containing the configuration required by Kosko to genera
 
 in `.socialgouv/config.json`
 
+Only `name` and `type` are mandatory.
+
+
 | Key                 | Description                                                                                                                                 |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | name                | application name                                                                                                                            |
