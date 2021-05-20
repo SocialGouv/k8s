@@ -21,9 +21,9 @@
   "license": "Apache-2.0",
   "scripts": {
     "generate": "kosko generate",
-    "generate:dev": "kosko generate  --env dev",
-    "generate:preprod": "kosko generate  --env preprod",
-    "generate:prod": "kosko generate  --env dev",
+    "generate:dev": "kosko generate --env dev",
+    "generate:preprod": "kosko generate --env preprod",
+    "generate:prod": "kosko generate --env dev",
     "gitlab": "DOTENV_CONFIG_PATH=./environments/.gitlab.env kosko generate --require dotenv/config",
     "gitlab:dev": "yarn --silent gitlab --env dev",
     "gitlab:preprod": "yarn --silent gitlab --env preprod",

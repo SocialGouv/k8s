@@ -39,15 +39,32 @@ Example :
 
 in `.socialgouv/environments`, add your config maps and sealed-secrets :
 
-dev
-preprod
-prod
-
-You can also provide additionnal kube manifests in each environment `manifests`subfolder.
+- dev : feature-branches
+- preprod : deployed on new releases
+- prod : deployed on new releases or manually
 
 ```
 environments
  |-dev
-    |-manifests
-          |-another-ingress.yml
+    |-[name].configmap.yaml
+    |-[name].sealed-secret.yaml
+    |-pg.sealed-secret.yaml        # Postgres connection
+    |-yaml
+      |-another-ingress.yml
+      |-some-netpol.yml
+  ...
+```
+
+You can also provide additionnal kube manifests in each environment `yaml` subfolder.
+
+### Dev
+
+You can execute locally like this :
+
+```sh
+cd .k8s
+yarn
+export SOCIALGOUV_CONFIG_PATH=/path/to/config.json;
+export $(grep -v '^#' .env.sample | xargs);
+yarn -s generate
 ```
