@@ -9,6 +9,7 @@ import { getIngressHost } from "@socialgouv/kosko-charts/utils/getIngressHost";
 import { getManifestByKind } from "@socialgouv/kosko-charts/utils/getManifestByKind";
 import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImagePath";
 
+import { addIngressAnnotations } from "../utils/addIngressAnnotations";
 import Config from "../utils/config";
 
 export default () => {
@@ -70,7 +71,6 @@ export default () => {
       },
     });
 
-    /* pass dynamic deployment URL as env var to the container */
     //@ts-expect-error
     const deployment = getManifestByKind(manifests, Deployment) as Deployment;
 
@@ -80,16 +80,12 @@ export default () => {
         //@ts-expect-error
         Ingress
       ) as Ingress;
-      if (deploymentIngress.metadata) {
-        deploymentIngress.metadata.annotations = {
-          ...(deploymentIngress.metadata.annotations || {}),
-          ...ingress.annotations,
-        };
-      }
+      addIngressAnnotations(deploymentIngress, ingress.annotations);
     }
 
     ok(deployment);
 
+    /* pass dynamic deployment URL as env var to the container */
     const frontendUrl = new EnvVar({
       name: "APP_BASE_URL",
       value: `https://${getIngressHost(manifests)}`,
