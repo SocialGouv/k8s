@@ -19,7 +19,7 @@ Only `name` and `type` are mandatory.
 | probes              | Custom [probes configuration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#probe-v1-core)                           |
 | resources           | Custom [resources](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#resourcerequirements-v1-core)                       |
 | subdomain           | force the default production subdomain.                                                                                                     |
-| ingress.annotations | add custom ingress annotations                                                                                                              |
+| ingress.annotations | add custom [ingress annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/)                                                                                                              |
 
 Example :
 
