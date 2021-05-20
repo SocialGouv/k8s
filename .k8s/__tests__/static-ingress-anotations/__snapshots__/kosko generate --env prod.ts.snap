@@ -12,17 +12,18 @@ metadata:
     app.gitlab.com/env: prod2
     app.gitlab.com/env.name: prod2
   labels:
-    app: ingress-annotations
+    app: static-ingress-annotations
     application: myapp
     owner: myapp
     team: myapp
-  name: ingress-annotations
+    component: nginx
+  name: static-ingress-annotations
   namespace: myapp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ingress-annotations
+      app: static-ingress-annotations
   template:
     metadata:
       annotations:
@@ -32,29 +33,31 @@ spec:
         app.gitlab.com/env: prod2
         app.gitlab.com/env.name: prod2
       labels:
-        app: ingress-annotations
+        app: static-ingress-annotations
         application: myapp
         owner: myapp
         team: myapp
+        component: nginx
     spec:
       containers:
-        - image: harbor.fabrique.social.gouv.fr/undefined/ingress-annotations:1.2.3
+        - image: >-
+            harbor.fabrique.social.gouv.fr/undefined/static-ingress-annotations:1.2.3
           livenessProbe:
             failureThreshold: 6
             httpGet:
-              path: /healthz
+              path: /index.html
               port: http
             initialDelaySeconds: 30
             periodSeconds: 5
             timeoutSeconds: 5
-          name: ingress-annotations
+          name: static-ingress-annotations
           ports:
-            - containerPort: 3000
+            - containerPort: 80
               name: http
           readinessProbe:
             failureThreshold: 15
             httpGet:
-              path: /healthz
+              path: /index.html
               port: http
             initialDelaySeconds: 0
             periodSeconds: 5
@@ -62,30 +65,27 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
-              cpu: 200m
-              memory: 256Mi
-            requests:
-              cpu: 50m
+              cpu: 500m
               memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 32Mi
           startupProbe:
             failureThreshold: 12
             httpGet:
-              path: /healthz
+              path: /index.html
               port: http
             periodSeconds: 5
-          env:
-            - name: APP_BASE_URL
-              value: https://myapp.fabrique.social.gouv.fr
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: ingress-annotations
+    app: static-ingress-annotations
     application: myapp
     owner: myapp
     team: myapp
-  name: ingress-annotations
+  name: static-ingress-annotations
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
@@ -97,9 +97,9 @@ spec:
   ports:
     - name: http
       port: 80
-      targetPort: 3000
+      targetPort: 80
   selector:
-    app: ingress-annotations
+    app: static-ingress-annotations
   type: ClusterIP
 ---
 apiVersion: extensions/v1beta1
@@ -116,11 +116,11 @@ metadata:
     app.gitlab.com/env.name: prod2
     nginx.ingress.kubernetes.io/configuration-snippet: 'more_set_headers \\"X-Answer: 42\\";'
   labels:
-    app: ingress-annotations
+    app: static-ingress-annotations
     application: myapp
     owner: myapp
     team: myapp
-  name: ingress-annotations
+  name: static-ingress-annotations
   namespace: myapp
 spec:
   rules:
@@ -128,12 +128,12 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: ingress-annotations
+              serviceName: static-ingress-annotations
               servicePort: 80
             path: /
   tls:
     - hosts:
         - myapp.fabrique.social.gouv.fr
-      secretName: ingress-annotations-crt
+      secretName: static-ingress-annotations-crt
 "
 `;
