@@ -34,6 +34,16 @@ Example :
     "annotations": {
       "nginx.ingress.kubernetes.io/configuration-snippet": "more_set_headers \"X-Answer: 42\";"
     }
+  },
+  "resources": {
+    "requests": {
+      "memory": "128Mi",
+      "cpu": "200m"
+    },
+    "limits": {
+      "memory": "256Mi",
+      "cpu": "500m"
+    }
   }
 }
 ```
