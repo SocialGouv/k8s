@@ -24,6 +24,8 @@ type ConfigTypes = {
   ingress?: {
     annotations?: Record<string, string>
   }
+  registry?:  string;
+  project?:  string;
 };
 
 const Config = () => {

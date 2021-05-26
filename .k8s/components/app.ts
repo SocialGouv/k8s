@@ -8,6 +8,7 @@ import { Ingress } from "kubernetes-models/networking.k8s.io/v1beta1/Ingress";
 import { getIngressHost } from "@socialgouv/kosko-charts/utils/getIngressHost";
 import { getManifestByKind } from "@socialgouv/kosko-charts/utils/getManifestByKind";
 import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImagePath";
+import { getGithubRegistryImagePath } from "@socialgouv/kosko-charts/utils/getGithubRegistryImagePath";
 
 import { addIngressAnnotations } from "../utils/addIngressAnnotations";
 import Config from "../utils/config";
@@ -23,7 +24,13 @@ export default () => {
     azurepg,
     hasura,
     ingress,
+    registry = "harbor",
+    project
   } = Config();
+
+  const image = registry === "ghcr"
+    ? getGithubRegistryImagePath({ name, project: project || name })
+    : getHarborImagePath({ name })
 
   const podProbes = {
     ...(probesPath
@@ -54,7 +61,7 @@ export default () => {
         withPostgres: azurepg && !hasura,
       },
       deployment: {
-        image: getHarborImagePath({ name }),
+        image,
         container: {
           resources: resources || {
             requests: {
