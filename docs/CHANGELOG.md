@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/SocialGouv/k8s/compare/v1.7.0...v1.8.0) (2021-05-27)
+
+
+### Features
+
+* Expose Hasura component from config. ([#36](https://github.com/SocialGouv/k8s/issues/36)) ([1d142d7](https://github.com/SocialGouv/k8s/commit/1d142d74ad1a226d1d3061a2b53db97b257e28e0))
+
 # [1.7.0](https://github.com/SocialGouv/k8s/compare/v1.6.1...v1.7.0) (2021-05-27)
 
 
