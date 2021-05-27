@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/SocialGouv/k8s/compare/v1.6.1...v1.7.0) (2021-05-27)
+
+
+### Features
+
+* Add registry option. ([#35](https://github.com/SocialGouv/k8s/issues/35)) ([390bc50](https://github.com/SocialGouv/k8s/commit/390bc5040a24c4ca3b41fd3c450fe99b1eeced82))
+
 ## [1.6.1](https://github.com/SocialGouv/k8s/compare/v1.6.0...v1.6.1) (2021-05-27)
 
 
