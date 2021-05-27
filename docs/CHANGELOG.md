@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/SocialGouv/k8s/compare/v1.6.0...v1.6.1) (2021-05-27)
+
+
+### Bug Fixes
+
+* use latest kosko-charts and get rid of gitlab registry ([#34](https://github.com/SocialGouv/k8s/issues/34)) ([c075b31](https://github.com/SocialGouv/k8s/commit/c075b319eb9c01115d51db32ea4dc829f633105b))
+
 # [1.6.0](https://github.com/SocialGouv/k8s/compare/v1.5.1...v1.6.0) (2021-05-20)
 
 
