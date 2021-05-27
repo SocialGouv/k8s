@@ -15,3 +15,12 @@ test("hasura: kosko generate --prod", async () => {
     })
   ).toMatchSnapshot()
 })
+
+test("hasura with ingress: kosko generate --prod", async () => {
+  expect(
+    await getEnvManifests("prod", "'!(_*)'", {
+      ...project(name).prod,
+      SOCIALGOUV_CONFIG_PATH: __dirname + "/config-with-ingress.json",
+    })
+  ).toMatchSnapshot()
+})

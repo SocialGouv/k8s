@@ -16,7 +16,7 @@ type ConfigTypes = {
   name: string;
   type: string;
   subdomain: string;
-  hasura?: boolean;
+  hasura?: boolean | "exposed";
   azurepg?: boolean;
   probes?: Probes;
   resources?: IIoK8sApiCoreV1ResourceRequirements;

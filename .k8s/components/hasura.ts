@@ -10,6 +10,7 @@ export default () => {
   return hasura
     ? create({
         env,
+        config: { ingress: hasura === "exposed" },
         deployment: {
           image: getHarborImagePath({ name: `${name}-hasura` }),
         },

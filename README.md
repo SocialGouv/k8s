@@ -9,17 +9,18 @@ in `.socialgouv/config.json`
 Only `name` and `type` are mandatory.
 
 
-| Key                 | Description                                                                                                                                 |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| name                | application name                                                                                                                            |
-| type                | app (Dockerfile), static                                                                                                                    |
-| hasura              | add hasura container                                                                                                                        |
-| azurepg             | add an azurepg connection                                                                                                                   |
-| probesPath          | The base url for [kubernetes probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
-| probes              | Custom [probes configuration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#probe-v1-core)                           |
-| resources           | Custom [resources](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#resourcerequirements-v1-core)                       |
-| subdomain           | force the default production subdomain.                                                                                                     |
-| ingress.annotations | add custom [ingress annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/)                                                                                                              |
+| Key                 | Type                | Description                                                                                                                                 |
+| ------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| name                | string              | Application name                                                                                                                            |
+| type                | "app" | "static"    | Deployment type: either `app` (Dockerfile) or `static`                                                                                      |
+| hasura              | boolean | "exposed" | Add hasura container (if value is `exposed`, a dedicated hasura ingress will be created)                                                    |
+| azurepg             | boolean             | Add an azurepg connection                                                                                                                   |
+| probesPath          | object              | The base url for [kubernetes probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
+| probes              | object              | Custom [probes configuration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#probe-v1-core)                           |
+| resources           | object              | Custom [resources](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#resourcerequirements-v1-core)                       |
+| subdomain           | string              | Force the default production subdomain.                                                                                                     |
+| ingress.annotations | object              | Add custom [ingress annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations)                     |
+| registry            | "harbor" | "ghcr"   | Indicates which registry to use. Default is `harbor`                                                                                        |
 
 Example :
 
