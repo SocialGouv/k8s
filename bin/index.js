@@ -50,7 +50,8 @@ const installDependencies = async () => {
 // Run kosko generate
 const koskoGenerate = async () => {
   try {
-    const { stdout } = await exec(`yarn --cwd ${k8sDir} generate`);
+    const cmd = `yarn --silent --cwd ${k8sDir} generate:dev`;
+    const { stdout } = await exec(cmd);
     console.log(stdout);
   } catch (error) {
     console.log("Error koskoGenerate:", error);
