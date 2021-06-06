@@ -1,8 +1,11 @@
 {
-  "name": "k8s",
+  "name": "@socialgouv/k8s",
   "version": "1.8.0",
-  "private": true,
   "license": "Apache-2.0",
+  "main": "./.k8s",
+  "bin": {
+    "k8s": "bin/index.js"
+  },
   "release": {
     "branches": [
       "master"
@@ -29,5 +32,9 @@
       ],
       "@semantic-release/github"
     ]
+  },
+  "dependencies": {
+    "fs-extra": "^10.0.0",
+    "tempy": "^1.0.1"
   }
 }
