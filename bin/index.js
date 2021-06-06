@@ -8,6 +8,7 @@ const exec = util.promisify(require('child_process').exec);
 // Define directories pathes
 const socialgouvEnvDir = path.join(__dirname, "../.socialgouv/environments");
 const socialgouvCmpDir = path.join(__dirname, "../.socialgouv/components");
+const k8sDir = path.join(__dirname, "../.k8s");
 const k8sEnvDir = path.join(__dirname, "../.k8s/environments");
 const k8sCmpDir = path.join(__dirname, "../.k8s/components");
 const k8sEnvBakDir = path.join(__dirname, "../.k8s/environments.bak");
@@ -40,7 +41,7 @@ const copyEnvAndCmp = async () => {
 // Install kosko charts dependencies
 const installDependencies = async () => {
   try {
-    const { stdout } = await exec('yarn --cwd .k8s');
+    const { stdout } = await exec(`yarn --cwd ${k8sDir}`);
     console.log(stdout);
   } catch (error) {
     console.log("Error installDependencies:", error);
@@ -50,7 +51,7 @@ const installDependencies = async () => {
 // Run kosko generate
 const koskoGenerate = async () => {
   try {
-    const { stdout } = await exec('yarn --cwd .k8s generate');
+    const { stdout } = await exec(`yarn --cwd ${k8sDir} generate`);
     console.log(stdout);
   } catch (error) {
     console.log("Error koskoGenerate:", error);
