@@ -6,15 +6,15 @@ const fs = require('fs-extra');
 const exec = util.promisify(require('child_process').exec);
 
 // Define directories pathes
-const socialgouvEnvDir = path.join(__dirname, "../.socialgouv/environments");
-const socialgouvCmpDir = path.join(__dirname, "../.socialgouv/components");
 const k8sDir = path.join(__dirname, "../.k8s");
-const k8sEnvDir = path.join(__dirname, "../.k8s/environments");
 const k8sCmpDir = path.join(__dirname, "../.k8s/components");
-const k8sEnvBakDir = path.join(__dirname, "../.k8s/environments.bak");
+const k8sEnvDir = path.join(__dirname, "../.k8s/environments");
 const k8sCmpBakDir = path.join(__dirname, "../.k8s/components.bak");
+const k8sEnvBakDir = path.join(__dirname, "../.k8s/environments.bak");
+const socialgouvCmpDir = path.join(__dirname, "../.socialgouv/components");
+const socialgouvEnvDir = path.join(__dirname, "../.socialgouv/environments");
 
-// Backup environments and components directory
+// Backup environments and components directories
 const doBackups = async () => {
   try {
     await fs.copy(k8sEnvDir, k8sEnvBakDir);
@@ -58,7 +58,7 @@ const koskoGenerate = async () => {
   }
 }
 
-// Backup environments and components directory
+// Backup environments and components directories
 const restoreBackups = async () => {
   try {
     await fs.remove(k8sEnvDir);
