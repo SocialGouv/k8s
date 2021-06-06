@@ -11,8 +11,8 @@ const k8sCmpDir = path.join(__dirname, "../.k8s/components");
 const k8sEnvDir = path.join(__dirname, "../.k8s/environments");
 const k8sCmpBakDir = path.join(__dirname, "../.k8s/components.bak");
 const k8sEnvBakDir = path.join(__dirname, "../.k8s/environments.bak");
-const socialgouvCmpDir = path.join(__dirname, "../.socialgouv/components");
-const socialgouvEnvDir = path.join(__dirname, "../.socialgouv/environments");
+const socialgouvCmpDir = path.join(process.env.SOCIALGOUV_CONFIG_PATH, "../components");
+const socialgouvEnvDir = path.join(process.env.SOCIALGOUV_CONFIG_PATH, "../environments");
 
 // Backup environments and components directories
 const doBackups = async () => {
