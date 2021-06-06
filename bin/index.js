@@ -41,7 +41,7 @@ const copyEnvAndCmp = async () => {
 // Install kosko charts dependencies
 const installDependencies = async () => {
   try {
-    const { stdout } = await exec(`yarn --cwd ${k8sDir}`);
+    const { stdout } = await exec(`yarn --cwd ${k8sDir} --silent`);
     console.log(stdout);
   } catch (error) {
     console.log("Error installDependencies:", error);
