@@ -3,7 +3,7 @@
   "description": "Generate k8s manifests via kosko-charts",
   "author": "Fabrique numérique des Ministères Sociaux <dsi-incubateur@sg.social.gouv.fr> (https://incubateur.social.gouv.fr)",
   "bugs": "https://github.com/SocialGouv/k8s/issues",
-  "version": "1.9.0-alpha.11",
+  "version": "1.9.0-alpha.12",
   "license": "Apache-2.0",
   "homepage": "https://github.com/SocialGouv/k8s#readme",
   "keywords": [],
