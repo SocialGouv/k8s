@@ -48,9 +48,9 @@ const installDependencies = async () => {
 }
 
 // Run kosko generate
-const koskoGenerate = async () => {
+const koskoGenerate = async (args = "--env dev") => {
   try {
-    const cmd = `yarn --silent --cwd ${k8sDir} generate:dev`;
+    const cmd = `yarn --silent --cwd ${k8sDir} generate ${args}`;
     const { stdout } = await exec(cmd);
     console.log(stdout);
   } catch (error) {
@@ -76,7 +76,7 @@ const main = async () => {
   await doBackups();
   await copyEnvAndCmp();
   await installDependencies();
-  await koskoGenerate();
+  await koskoGenerate(process.argv.slice(2).join(" "));
   await restoreBackups();
 }
 
