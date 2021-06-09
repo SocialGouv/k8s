@@ -96,32 +96,9 @@ spec:
               port: http
             periodSeconds: 15
             initialDelaySeconds: 30
-          envFrom:
-            - configMapRef:
-                name: myapp-configmap
           env:
             - name: APP_BASE_URL
               value: https://preprod-myapp.dev2.fabrique.social.gouv.fr
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: myapp-configmap
-  annotations:
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: preprod-dev2
-    app.gitlab.com/env.name: preprod-dev2
-  labels:
-    application: v1-2-3-myapp
-    owner: myapp
-    team: myapp
-    cert: wildcard
-  namespace: myapp-85-preprod-dev2
-data:
-  NODE_ENV: production
-  GITHUB_ORGANIZATION: SocialGouv
 ---
 apiVersion: v1
 kind: Service

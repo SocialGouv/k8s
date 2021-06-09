@@ -360,31 +360,9 @@ spec:
               path: /healthz
               port: http
             periodSeconds: 5
-          envFrom:
-            - configMapRef:
-                name: myapp-configmap
           env:
             - name: APP_BASE_URL
               value: https://myapp.fabrique.social.gouv.fr
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: myapp-configmap
-  annotations:
-    kapp.k14s.io/disable-default-ownership-label-rules: ''
-    kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: prod2
-    app.gitlab.com/env.name: prod2
-  labels:
-    application: myapp
-    owner: myapp
-    team: myapp
-  namespace: myapp
-data:
-  NODE_ENV: production
-  GITHUB_ORGANIZATION: SocialGouv
 ---
 apiVersion: v1
 kind: Service
