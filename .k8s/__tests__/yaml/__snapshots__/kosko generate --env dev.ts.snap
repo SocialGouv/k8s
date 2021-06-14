@@ -9,16 +9,16 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: master-dev2
-    app.gitlab.com/env.name: master-dev2
+    app.gitlab.com/env: master-dev42
+    app.gitlab.com/env.name: master-dev42
   labels:
     app: myapp
-    application: master-dev2-myapp
+    application: master-dev42-myapp
     owner: myapp
     team: myapp
     cert: wildcard
   name: myapp
-  namespace: myapp-85-master-dev2
+  namespace: myapp-85-master-dev42
 spec:
   replicas: 1
   selector:
@@ -30,11 +30,11 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-myapp
-        app.gitlab.com/env: master-dev2
-        app.gitlab.com/env.name: master-dev2
+        app.gitlab.com/env: master-dev42
+        app.gitlab.com/env.name: master-dev42
       labels:
         app: myapp
-        application: master-dev2-myapp
+        application: master-dev42-myapp
         owner: myapp
         team: myapp
         cert: wildcard
@@ -78,14 +78,14 @@ spec:
             periodSeconds: 5
           env:
             - name: APP_BASE_URL
-              value: https://master-dev2-myapp.dev2.fabrique.social.gouv.fr
+              value: https://master-dev42-myapp.dev42.fabrique.social.gouv.fr
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
     app: myapp
-    application: master-dev2-myapp
+    application: master-dev42-myapp
     owner: myapp
     team: myapp
     cert: wildcard
@@ -94,9 +94,9 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: master-dev2
-    app.gitlab.com/env.name: master-dev2
-  namespace: myapp-85-master-dev2
+    app.gitlab.com/env: master-dev42
+    app.gitlab.com/env.name: master-dev42
+  namespace: myapp-85-master-dev42
 spec:
   ports:
     - name: http
@@ -114,19 +114,19 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: master-dev2
-    app.gitlab.com/env.name: master-dev2
+    app.gitlab.com/env: master-dev42
+    app.gitlab.com/env.name: master-dev42
   labels:
     app: myapp
-    application: master-dev2-myapp
+    application: master-dev42-myapp
     owner: myapp
     team: myapp
     cert: wildcard
   name: myapp
-  namespace: myapp-85-master-dev2
+  namespace: myapp-85-master-dev42
 spec:
   rules:
-    - host: master-dev2-myapp.dev2.fabrique.social.gouv.fr
+    - host: master-dev42-myapp.dev42.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -135,7 +135,7 @@ spec:
             path: /
   tls:
     - hosts:
-        - master-dev2-myapp.dev2.fabrique.social.gouv.fr
+        - master-dev42-myapp.dev42.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: extensions/v1beta1
@@ -150,7 +150,7 @@ metadata:
     app.kubernetes.io/component: redirect
     app.kubernetes.io/name: www
   name: www-redirect
-  namespace: myapp-85-master-dev2
+  namespace: myapp-85-master-dev42
 spec:
   rules:
     - host: www.testapp.fr

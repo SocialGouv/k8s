@@ -9,8 +9,8 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: preprod-dev2
-    app.gitlab.com/env.name: preprod-dev2
+    app.gitlab.com/env: preprod-dev42
+    app.gitlab.com/env.name: preprod-dev42
   labels:
     app: myapp
     application: v1-2-3-myapp
@@ -18,7 +18,7 @@ metadata:
     team: myapp
     cert: wildcard
   name: myapp
-  namespace: myapp-85-preprod-dev2
+  namespace: myapp-85-preprod-dev42
 spec:
   replicas: 1
   selector:
@@ -30,8 +30,8 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-myapp
-        app.gitlab.com/env: preprod-dev2
-        app.gitlab.com/env.name: preprod-dev2
+        app.gitlab.com/env: preprod-dev42
+        app.gitlab.com/env.name: preprod-dev42
       labels:
         app: myapp
         application: v1-2-3-myapp
@@ -77,7 +77,7 @@ spec:
             periodSeconds: 5
           env:
             - name: APP_BASE_URL
-              value: https://preprod-myapp.dev2.fabrique.social.gouv.fr
+              value: https://preprod-myapp.dev42.fabrique.social.gouv.fr
 ---
 apiVersion: v1
 kind: Service
@@ -93,9 +93,9 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: preprod-dev2
-    app.gitlab.com/env.name: preprod-dev2
-  namespace: myapp-85-preprod-dev2
+    app.gitlab.com/env: preprod-dev42
+    app.gitlab.com/env.name: preprod-dev42
+  namespace: myapp-85-preprod-dev42
 spec:
   ports:
     - name: http
@@ -113,8 +113,8 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-myapp
-    app.gitlab.com/env: preprod-dev2
-    app.gitlab.com/env.name: preprod-dev2
+    app.gitlab.com/env: preprod-dev42
+    app.gitlab.com/env.name: preprod-dev42
   labels:
     app: myapp
     application: v1-2-3-myapp
@@ -122,10 +122,10 @@ metadata:
     team: myapp
     cert: wildcard
   name: myapp
-  namespace: myapp-85-preprod-dev2
+  namespace: myapp-85-preprod-dev42
 spec:
   rules:
-    - host: preprod-myapp.dev2.fabrique.social.gouv.fr
+    - host: preprod-myapp.dev42.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -134,7 +134,7 @@ spec:
             path: /
   tls:
     - hosts:
-        - preprod-myapp.dev2.fabrique.social.gouv.fr
+        - preprod-myapp.dev42.fabrique.social.gouv.fr
       secretName: wildcard-crt
 ---
 apiVersion: extensions/v1beta1
@@ -149,7 +149,7 @@ metadata:
     app.kubernetes.io/component: redirect
     app.kubernetes.io/name: www
   name: www-redirect
-  namespace: myapp-85-preprod-dev2
+  namespace: myapp-85-preprod-dev42
 spec:
   rules:
     - host: www.testapp.fr
