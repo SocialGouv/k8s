@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/SocialGouv/k8s/compare/v1.9.0...v1.9.1) (2021-06-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @socialgouv/kosko-charts to ^6.1.0 ([#20](https://github.com/SocialGouv/k8s/issues/20)) ([f40f756](https://github.com/SocialGouv/k8s/commit/f40f756231e07be72c28a6b069d4a28023d50997))
+
 # [1.9.0](https://github.com/SocialGouv/k8s/compare/v1.8.0...v1.9.0) (2021-06-14)
 
 
