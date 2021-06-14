@@ -1,19 +1,18 @@
-import { ok } from "assert";
 import env from "@kosko/env";
-import { EnvVar } from "kubernetes-models/v1/EnvVar";
-import { addEnv } from "@socialgouv/kosko-charts/utils/addEnv";
 import { create } from "@socialgouv/kosko-charts/components/app";
-import { Deployment } from "kubernetes-models/apps/v1/Deployment";
-import { Ingress } from "kubernetes-models/networking.k8s.io/v1beta1/Ingress";
+import { addEnv } from "@socialgouv/kosko-charts/utils/addEnv";
+import { getGithubRegistryImagePath } from "@socialgouv/kosko-charts/utils/getGithubRegistryImagePath";
+import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImagePath";
 import { getIngressHost } from "@socialgouv/kosko-charts/utils/getIngressHost";
 import { getManifestByKind } from "@socialgouv/kosko-charts/utils/getManifestByKind";
-import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImagePath";
-import { getGithubRegistryImagePath } from "@socialgouv/kosko-charts/utils/getGithubRegistryImagePath";
-
+import { ok } from "assert";
+import { Deployment } from "kubernetes-models/apps/v1/Deployment";
+import { Ingress } from "kubernetes-models/networking.k8s.io/v1beta1/Ingress";
+import { EnvVar } from "kubernetes-models/v1/EnvVar";
 import { addIngressAnnotations } from "../utils/addIngressAnnotations";
 import Config from "../utils/config";
 
-export default () => {
+export default async () => {
   const {
     name,
     subdomain,
@@ -25,12 +24,13 @@ export default () => {
     hasura,
     ingress,
     registry = "harbor",
-    project
+    project,
   } = Config();
 
-  const image = registry === "ghcr"
-    ? getGithubRegistryImagePath({ name, project: project || name })
-    : getHarborImagePath({ name })
+  const image =
+    registry === "ghcr"
+      ? getGithubRegistryImagePath({ name, project: project || name })
+      : getHarborImagePath({ name });
 
   const podProbes = {
     ...(probesPath
@@ -53,7 +53,7 @@ export default () => {
   };
 
   if (type && type === "app") {
-    const manifests = create(name, {
+    const manifests = await create(name, {
       env,
       config: {
         subdomain,

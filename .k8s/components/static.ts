@@ -3,15 +3,13 @@ import { create } from "@socialgouv/kosko-charts/components/nginx";
 import { getHarborImagePath } from "@socialgouv/kosko-charts/utils/getHarborImagePath";
 import { getManifestByKind } from "@socialgouv/kosko-charts/utils/getManifestByKind";
 import { Ingress } from "kubernetes-models/networking.k8s.io/v1beta1/Ingress";
-
 import { addIngressAnnotations } from "../utils/addIngressAnnotations";
-
 import Config from "../utils/config";
 
-export default () => {
+export default async () => {
   const { name, type, subdomain, ingress } = Config();
   if (type === "static") {
-    const manifests = create(name, {
+    const manifests = await create(name, {
       env,
       config: { subdomain },
       deployment: {
