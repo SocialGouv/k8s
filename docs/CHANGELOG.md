@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/SocialGouv/k8s/compare/v1.8.0...v1.9.0) (2021-06-14)
+
+
+### Features
+
+* **deps:** update kosko monorepo (major) ([#24](https://github.com/SocialGouv/k8s/issues/24)) ([7b80700](https://github.com/SocialGouv/k8s/commit/7b80700ad66177dbb4ceacf888c3f733b1b5d535))
+
 # [1.8.0](https://github.com/SocialGouv/k8s/compare/v1.7.0...v1.8.0) (2021-05-27)
 
 
